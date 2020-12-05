@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 	<ItemGroup Label="Runtime Dependencies">
-		<PackageReference Update="Funcky" Version="[2.2.0, 3)" />
+		<PackageReference Update="Funcky" Version="[2.3.0, 3)" />
 		<PackageReference Update="Autofac" Version="[6.0.0, 7)" />
 	</ItemGroup>
 	<ItemGroup Label="Build Dependencies">

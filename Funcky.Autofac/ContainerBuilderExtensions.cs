@@ -8,24 +8,28 @@ namespace Funcky.Autofac
 {
     public static class ContainerBuilderExtensions
     {
+        private const BindingFlags FromNullableBindingFlags = BindingFlags.Static | BindingFlags.NonPublic;
+
         private static readonly MethodInfo FromNullableMethod =
             typeof(ContainerBuilderExtensions)
-                .GetMethod(nameof(FromNullable), BindingFlags.Static | BindingFlags.NonPublic)!;
+                .GetMethod(nameof(FromNullable), FromNullableBindingFlags)!;
+
+        private static readonly Type OptionType = typeof(Option<>);
 
         public static void RegisterOption(this ContainerBuilder containerBuilder)
-        {
-            containerBuilder
+            => containerBuilder
                 .RegisterGeneric(ResolveOption)
-                .As(typeof(Option<>))
-                .IfNotRegistered(typeof(Option<>));
-        }
+                .As(OptionType)
+                .IfNotRegistered(OptionType);
 
         private static object ResolveOption(IComponentContext context, Type[] genericTypes)
-        {
-            var itemType = genericTypes.Single();
-            var fromNullableMethod = FromNullableMethod.MakeGenericMethod(itemType);
-            return fromNullableMethod.Invoke(null, new[] { context.ResolveOptional(itemType) });
-        }
+            => ResolveOption(context.ResolveOptional, genericTypes.Single());
+
+        private static object ResolveOption(Func<Type, object?> resolve, Type innerType)
+            => ResolveOption(FromNullableMethod.MakeGenericMethod(innerType), resolve(innerType));
+
+        private static object ResolveOption(MethodBase fromNullableMethod, object? innerValue)
+            => fromNullableMethod.Invoke(null, new[] { innerValue });
 
         private static Option<T> FromNullable<T>(T value)
             where T : class

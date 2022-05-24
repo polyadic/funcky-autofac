@@ -1,4 +1,5 @@
 using Autofac;
+using Funcky.Extensions;
 using Funcky.Monads;
 using Funcky.Xunit;
 using Xunit;

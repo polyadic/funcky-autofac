@@ -1,9 +1,9 @@
 using Autofac.Features.Indexed;
 using Funcky.Monads;
 
-namespace Funcky.Autofac
+namespace Funcky.Extensions
 {
-    public static class IndexExtensions
+    public static class AutofacIndexExtensions
     {
         public static Option<TValue> GetOrNone<TKey, TValue>(this IIndex<TKey, TValue> index, TKey key)
             where TValue : notnull

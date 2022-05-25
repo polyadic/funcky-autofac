@@ -11,6 +11,7 @@
         <Version>0.1.0</Version>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <RootNamespace>Funcky</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Funcky" />

@@ -4,14 +4,14 @@ using System.Reflection;
 using Autofac;
 using Funcky.Monads;
 
-namespace Funcky.Autofac
+namespace Funcky.Extensions
 {
-    public static class ContainerBuilderExtensions
+    public static class AutofacContainerBuilderExtensions
     {
         private const BindingFlags FromNullableBindingFlags = BindingFlags.Static | BindingFlags.NonPublic;
 
         private static readonly MethodInfo FromNullableMethod =
-            typeof(ContainerBuilderExtensions)
+            typeof(AutofacContainerBuilderExtensions)
                 .GetMethod(nameof(FromNullable), FromNullableBindingFlags)!;
 
         private static readonly Type OptionType = typeof(Option<>);
